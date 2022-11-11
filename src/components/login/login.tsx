@@ -1,12 +1,22 @@
 import axios from 'axios';
 import React, { Component, useState } from 'react';
+import { connect } from 'react-redux';
+import * as actions from './actions';
 
 
 const API_GATEWAY_URL = 'https://kolqsq8nrf.execute-api.us-east-1.amazonaws.com/dev';
 
-function Login(): any { 
+function Login(props: any): any { 
   const [username, setUsername] = useState("marcgarcia");
   const [password, setPassword] = useState("password");
+
+  const mockUser = {
+    id: 1,
+    username: "marcgarcia",
+    firstName: "Marc",
+    lastName: "Garcia",
+    isAdmin: true
+  };
 
   const clickEvent = () => {
     console.log('click event\n','user:',username,', password:',password);
@@ -18,7 +28,12 @@ function Login(): any {
     }).catch(err => {
       console.log('AWS Returned Error :( ', err);
     }).finally(() => {
-      window.location.href = "/home";
+      props.setIsAuthenticated(mockUser);
+      console.log('api call state: ', props.user);
+      setTimeout(() => {
+        window.location.href = "/home";
+      }, 30000)
+      // window.location.href = "/home";
     });
   }
 
@@ -72,4 +87,19 @@ function Login(): any {
     </div>
   );
 }
-export default Login;
+
+const mapDispatchToProps = (dispatch:any) => {
+  return {
+    setIsAuthenticated: (user: any) => dispatch(actions.setIsAuthenticated(user))
+  }
+}
+
+const mapStateToProps = (state:any):any => {
+  console.log('current app state: ', state);
+  return { user: state.user }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps  
+)(Login);
