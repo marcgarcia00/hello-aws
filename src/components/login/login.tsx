@@ -4,18 +4,21 @@ import React, { Component, useState } from 'react';
 
 const API_GATEWAY_URL = 'https://kolqsq8nrf.execute-api.us-east-1.amazonaws.com/dev';
 
-function Login() { 
+function Login(): any { 
   const [username, setUsername] = useState("marcgarcia");
   const [password, setPassword] = useState("password");
 
   const clickEvent = () => {
     console.log('click event\n','user:',username,', password:',password);
     // api service call
-    const reqBody = {'username': username, 'password': password}
-    
-    axios.post(`${API_GATEWAY_URL}/login`, reqBody)
+    const req = JSON.stringify({'username': username, 'password': password});
+    axios.post(`${API_GATEWAY_URL}/login`, req)
     .then(res => {
-      console.log('response returned from AWS: ', res.data);
+      console.log('response returned from AWS: ', res);
+    }).catch(err => {
+      console.log('AWS Returned Error :( ', err);
+    }).finally(() => {
+      window.location.href = "/home";
     });
   }
 
@@ -35,7 +38,7 @@ function Login() {
             onChange={(e) => setUsername(e.target.value)}/>
           </div>
         </div>
-        <div className="flex flex-row items-center mb-5 px-3">
+        <div className="flex flex-row items-center mb-2 px-3">
           <div className="pr-3 font-bold">PASSWORD:</div>
           <div>
             <input 
@@ -47,6 +50,7 @@ function Login() {
           </div>
         </div>
       </div>
+      <div className="flex flex-col w-full mb-3"><hr/></div>
       <div className="flex flex-row w-full justify-evenly">
         <div className="
           bg-green-500 
