@@ -14,7 +14,6 @@ function Home(props: any): any {
         <p>{props.counter.value}</p>
       </div>
     <div className="flex flex-row items-between">
-      <Link to ="/room">
         <div 
         className="
           bg-red-400
@@ -24,8 +23,8 @@ function Home(props: any): any {
           text-2xl
           mr-3
           cursor-pointer"
+          onClick={() => props.decrement()}
         >CREATE ROOM</div>
-      </Link>
         <div
         className="
           bg-blue-400

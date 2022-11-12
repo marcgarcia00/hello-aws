@@ -6,13 +6,20 @@ import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 
 import Home from './components/home/home';
 import { Provider } from 'react-redux';
-import store from './store';
+import { store } from './store';
 import Room from './components/room/room';
+import { saveToLocalStorage } from './store/localStorage';
+import { debounce } from 'debounce';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+store.subscribe(
+  debounce(() => {
+    saveToLocalStorage(store.getState())
+  }, 500)
+);
 // const routes = [
 //   <Route path='/' element="App"/>
 // <Route path='/home' element="App"/>
