@@ -1,19 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import CardList from '../cards/cards';
 import * as actions from './actions';
 
 function Home(props: any): any {
-  console.log('state: ', props.user);
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="flex flex-col">{props.user.isAdmin ? 'ADMIN': 'USER'}</div>
-      <div className="flex flex-row text-xl">
-        <p>Counter:&nbsp;</p>
-        <p>{props.counter.value}</p>
-      </div>
+      <div className="flex flex-col mb-3 text-xl">{props.user.firstName ? ("Hi, " + props.user.firstName) : 'Welcome'}</div>
     <div className="flex flex-row items-between">
+      <Link to="/create-room">
         <div 
         className="
           bg-red-400
@@ -23,8 +18,9 @@ function Home(props: any): any {
           text-2xl
           mr-3
           cursor-pointer"
-          onClick={() => props.decrement()}
         >CREATE ROOM</div>
+      </Link>
+      <Link to="/rooms">
         <div
         className="
           bg-blue-400
@@ -32,11 +28,8 @@ function Home(props: any): any {
           rounded
           text-white
           text-2xl
-          cursor-pointer
-        " onClick={() => props.increment()}>ENTER ROOM</div>
-      </div>
-      <div className="flex flex-col border rounded border-gray-600 border-solid p-3">
-        <CardList/>
+          cursor-pointer">ENTER ROOM</div>
+      </Link>
       </div>
     </div>
   );

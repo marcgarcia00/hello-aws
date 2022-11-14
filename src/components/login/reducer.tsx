@@ -1,27 +1,28 @@
-const userState = {
+const initState = {
   isAuthenticated: false,
   isAdmin: false,
-  user: {
-    firstName: '',
-    lastName: ''
-  }
+  firstName: '',
+  lastName: ''
 }
 
 export const userConstants = {
-  setIsAuthenticated: "SET_IS_AUTHENTICATED",
-  setIsAdmin: "SET_IS_ADMIN"
+  SIGN_IN_USER_START: "SIGN_IN_USER_START",
+  SIGN_IN_USER_ERROR: "SIGN_IN_USER_ERROR",
+  SET_IS_AUTHENTICATED: "SET_IS_AUTHENTICATED",
+  SET_IS_ADMIN: "SET_IS_ADMIN"
 }
 
-function userReducer(state = userState, action: any) {
+function userReducer(state = initState, action: any) {
   switch(action.type) {
-    case userConstants.setIsAuthenticated:
+    case userConstants.SET_IS_AUTHENTICATED:
       console.log('USER Reducer:', action.payload)
       return {
         ...state,
         isAuthenticated: action.payload != null,
         isAdmin: action.payload.isAdmin,
-        user: {...action.payload}
-    }
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName
+      }
     default:
       return state;
   }

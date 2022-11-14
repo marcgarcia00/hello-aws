@@ -1,4 +1,4 @@
-const counterState = {
+const initState = {
   value: 0
 }
 
@@ -7,7 +7,7 @@ export const counterConstants = {
   DECREMENT: "DECREMENT"
 }
 
-function counterReducer(state = counterState, action: any) {
+function counterReducer(state = initState, action: any) {
   switch(action.type) {
     case counterConstants.INCREMENT:
       return {...state, value: state.value + 1}
@@ -18,4 +18,4 @@ function counterReducer(state = counterState, action: any) {
   }
 }
 
-export default counterReducer
+export default counterReducer;

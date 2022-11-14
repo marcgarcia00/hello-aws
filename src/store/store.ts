@@ -1,17 +1,16 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
-import counterReducer from './components/home/reducer';
-import userReducer from './components/login/reducer';
-import { loadFromLocalStorage } from './store/localStorage';
+import counterReducer from '../components/home/reducer';
+import userReducer from '../components/login/reducer';
+import roomReducer from '../components/room/reducer';
+import { loadFromLocalStorage } from './localStorage';
 
 const rootReducer = combineReducers({
   user: userReducer,
-  counter: counterReducer
+  counter: counterReducer,
+  room: roomReducer
 });
-// const store: any = configureStore({
-//   reducer: reducer,
-//   middleware: [thunk]
-// });
+
 export const store = configureStore({
     reducer: rootReducer,
     middleware: [thunk],

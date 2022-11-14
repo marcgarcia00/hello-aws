@@ -1,16 +1,49 @@
+import { User } from "../../interface/user";
 import { userConstants } from "./reducer";
+import UserService from "./service";
+
+const mockUser: User = {
+  id: 1,
+  username: "marcgarcia",
+  firstName: "Marc",
+  lastName: "Garcia",
+  isAdmin: true
+};
+
+export const signinUserStart = () => ({
+  type: userConstants.SIGN_IN_USER_START
+});
+
+export const signInUserError = () => ({
+  type: userConstants.SIGN_IN_USER_ERROR
+});
+
+export const userSignInAsync = (username: string, password: string) => (dispatch: any) => {
+  dispatch(signinUserStart());
+
+  const req = JSON.stringify({'username': username, 'password': password})
+  
+  UserService.userSignIn(req)
+  .then(res => {
+    console.log('response returned from AWS: ', res);
+    dispatch(setIsAuthenticated(mockUser));
+  }).catch(err => {
+    dispatch(setIsAuthenticated(mockUser))
+    console.log('AWS Returned Error :( ', err);
+  });
+}
 
 export function setIsAuthenticated(payload: any): any {
   console.log("SET AUTH ACTION: ", payload);
   return {
-    type: userConstants.setIsAuthenticated,
+    type: userConstants.SET_IS_AUTHENTICATED,
     payload: payload
   }
 }
 
 export function setIsAdmin(payload: any): any {
   return {
-    type: userConstants.setIsAdmin,
+    type: userConstants.SET_IS_ADMIN,
     payload: payload
   }
 }

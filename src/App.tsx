@@ -1,15 +1,28 @@
-import './App.css';
-import Login from './components/login/login';
+import { connect } from 'react-redux';
+import MenuBar from './components/menuBar';
+import RoutePaths from './RoutePaths';
+import { HyperlinkProps } from './components/menuBar';
 
-function App() {
+function App(props: any) {
+
+  let hyperLinks: HyperlinkProps [] = [
+    { display: 'HOME', link: '/home'},
+    { display: 'ROOM', link: '/room'}
+  ];
+  let displayAuth = props.user.isAuthenticated ? { display: 'LOGOUT', link: '/'} : { display: 'LOGIN', link: '/'}
+  hyperLinks.push(displayAuth);
   return (
-    <div className="App flex flex-col items-center justify-center">
-      <div className="flex flex-col w-full bg-blue-500 p-2 mb-5">
-        <h3 className='text-left text-3xl text-white font-bold'>PLANNING POKER</h3>
-      </div>
-      <div className="flex flex-col"><Login/></div>
+    <div className="App flex flex-col">
+      <MenuBar hyperlinks={hyperLinks}/>
+      <RoutePaths/>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state: any): any => {
+  return { user: state.user}
+}
+
+export default connect(
+  mapStateToProps
+)(App);

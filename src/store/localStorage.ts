@@ -1,12 +1,12 @@
 export function loadFromLocalStorage() {
   try {
-    const serializedState = localStorage.serializedState('state');
+    const serializedState = localStorage.getItem('state');
     if (serializedState === null) {
       return undefined;
     }
     return JSON.parse(serializedState);
   } catch (err) {
-    console.log("Error occured during load");
+    console.log("Error occured during load", err);
     return undefined;
   }
 }
