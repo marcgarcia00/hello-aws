@@ -47,3 +47,10 @@ export function setIsAdmin(payload: any): any {
     payload: payload
   }
 }
+
+export function logout(): any {
+  console.log("logout clicked");
+  return {
+    type: userConstants.LOGOUT
+  }
+}

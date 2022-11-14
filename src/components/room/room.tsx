@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import CardList from '../cards/cards';
 
-function Room():any {
+function Room(props: any):any {
+
   return(
     <div className='flex flex-row w-full h-full p-5 justify-center'>
       <div className='flex flex-col w-4/5 items-center p-5 border rounded mx-4'>

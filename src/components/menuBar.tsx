@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export interface HyperlinkProps {
+export type HyperlinkProps = {
   display: string,
-  link: string
+  linkClicked: any;
 }
 
 interface Props {
@@ -15,9 +15,7 @@ function MenuBar(props: Props) {
   
   props.hyperlinks.map((hyperlink: HyperlinkProps) => {
     menuBar.push(
-      <Link key={hyperlink.display} to={hyperlink.link}>
-        <div className="mx-3 text-xl tracking-wider font-bold text-white cursor-pointer">{hyperlink.display}</div>
-      </Link>
+      <div className="mx-3 text-xl tracking-wider font-bold text-white cursor-pointer" onClick={() => hyperlink.linkClicked() }>{hyperlink.display}</div>
     );
   })
   return(

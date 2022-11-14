@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { User } from '../../../interface/user';
 import * as actions from '../actions';
 
 function LoginWindow(props: any): any { 
   const [username, setUsername] = useState("marcgarcia");
   const [password, setPassword] = useState("password");
 
-  useEffect(() => {
-    if(props.user.isAuthenticated) {
-      window.location.href = "/home";
-    }
-  }, [props.user.isAuthenticated]);
+  // useEffect(() => {
+  //   if(props.user && props.user.isAuthenticated) {
+  //     window.location.href = "/home";
+  //   }
+  // }, [props.user.isAuthenticated]);
 
   const handleLogin = () => {
     props.userSignIn(username, password);
@@ -75,7 +74,6 @@ const mapDispatchToProps = (dispatch:any) => {
 }
 
 const mapStateToProps = (state: any):any => {
-  console.log('current app state: ', state);
   return { user: state.user }
 }
 

@@ -9,7 +9,8 @@ export const userConstants = {
   SIGN_IN_USER_START: "SIGN_IN_USER_START",
   SIGN_IN_USER_ERROR: "SIGN_IN_USER_ERROR",
   SET_IS_AUTHENTICATED: "SET_IS_AUTHENTICATED",
-  SET_IS_ADMIN: "SET_IS_ADMIN"
+  SET_IS_ADMIN: "SET_IS_ADMIN",
+  LOGOUT: "LOGOUT"
 }
 
 function userReducer(state = initState, action: any) {
@@ -23,6 +24,9 @@ function userReducer(state = initState, action: any) {
         firstName: action.payload.firstName,
         lastName: action.payload.lastName
       }
+    
+    case userConstants.LOGOUT:
+      return  {...initState}
     default:
       return state;
   }

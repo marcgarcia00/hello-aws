@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 
@@ -19,8 +19,10 @@ const displayCards: Card[] = [
 ]
 
 function CardList(props: any) {
-  const setVote = (e: any) => {
-    console.log("vote called with:", e.target.value);
+  const [ activeCard, setActiveCard ] = useState("");
+  
+  const setVote = (id: any) => {
+    setActiveCard(id);
   }
 
   let cards: any[] = []
@@ -29,9 +31,9 @@ function CardList(props: any) {
       <button key={`card-${card.display}`} 
       className={`flex flex-col items-center justify-center text-3xl 
       h-28 w-20 border-2 border-bg-gray-400 rounded border-solid p-2 
-      cursor-pointer ${ props.room.vote != null ? 'border-blue-300' : ''}`}
+      cursor-pointer ${ card.id === activeCard ? 'bg-green-400 text-white border-green-600' : ''}`}
       value={card.id}
-      onClick={e => setVote(e)}>
+      onClick={()=> setVote(card.id)}>
         {card.display}
       </button>
     );
