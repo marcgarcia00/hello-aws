@@ -1,7 +1,8 @@
 import axios from "axios";
 import { User } from "../../interface/user";
 
-const API_GATEWAY_URL = 'https://kolqsq8nrf.execute-api.us-east-1.amazonaws.com/dev';
+// const API_GATEWAY_URL = 'https://kolqsq8nrf.execute-api.us-east-1.amazonaws.com/dev';
+const API_GATEWAY_URL = 'https://a3hdbenq0e.execute-api.us-east-1.amazonaws.com/dev';
 
 class UserService {
   userSignIn = (requestBody: any): Promise<User> => 
