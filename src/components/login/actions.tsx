@@ -21,7 +21,8 @@ export const signInUserError = () => ({
 export const userSignInAsync = (username: string, password: string) => (dispatch: any) => {
   dispatch(signinUserStart());
 
-  const req = JSON.stringify({'username': username, 'password': password})
+  const req = JSON.stringify({'id': 1, 'username': username, 'password': password})
+  // const req = JSON.stringify({'id': 2, 'username': username, 'password': password})
   
   UserService.userSignIn(req)
   .then(res => {
