@@ -15,7 +15,7 @@ function MenuBar(props: Props) {
   
   props.hyperlinks.map((hyperlink: HyperlinkProps) => {
     menuBar.push(
-      <div className="mx-3 text-xl tracking-wider font-bold text-white cursor-pointer" onClick={() => hyperlink.linkClicked() }>{hyperlink.display}</div>
+      <div key={hyperlink.display} className="mx-3 text-xl tracking-wider font-bold text-white cursor-pointer" onClick={() => hyperlink.linkClicked() }>{hyperlink.display}</div>
     );
   })
   return(
